@@ -1,9 +1,33 @@
+
 import React, { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import DashboardHeader from '../components/DashboardHeader';
 import PageTransition from '../components/PageTransition';
 import DynamicSidebar from '../components/DynamicSidebar';
-import { LayoutDashboard, Users, Settings, Layers, BarChart4 } from 'lucide-react';
+import StatCard from '../components/StatCard';
+import { motion } from 'framer-motion';
+import { 
+  LayoutDashboard, 
+  Users, 
+  Settings, 
+  Layers, 
+  BarChart4, 
+  ShoppingCart, 
+  DollarSign, 
+  BarChart2 
+} from 'lucide-react';
+import { 
+  ResponsiveContainer, 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  BarChart, 
+  Bar, 
+  Legend 
+} from 'recharts';
 
 const Dashboard: React.FC = () => {
   const { requireAuth } = useAuth();
@@ -11,6 +35,27 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     requireAuth();
   }, [requireAuth]);
+
+  // Sample data for charts
+  const salesData = [
+    { name: 'Jan', value: 4000 },
+    { name: 'Feb', value: 3000 },
+    { name: 'Mar', value: 5000 },
+    { name: 'Apr', value: 4500 },
+    { name: 'May', value: 6000 },
+    { name: 'Jun', value: 5500 },
+    { name: 'Jul', value: 7000 },
+  ];
+
+  const trafficData = [
+    { name: 'Mon', desktop: 4000, mobile: 2400, tablet: 1200 },
+    { name: 'Tue', desktop: 3000, mobile: 1398, tablet: 900 },
+    { name: 'Wed', desktop: 2000, mobile: 3800, tablet: 1300 },
+    { name: 'Thu', desktop: 2780, mobile: 3908, tablet: 1400 },
+    { name: 'Fri', desktop: 1890, mobile: 4800, tablet: 1500 },
+    { name: 'Sat', desktop: 2390, mobile: 3800, tablet: 1000 },
+    { name: 'Sun', desktop: 3490, mobile: 4300, tablet: 1100 },
+  ];
 
   // Define menu items
   const menuItems = [
