@@ -1,39 +1,9 @@
-
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
-import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
-import StatCard from '../components/StatCard';
 import PageTransition from '../components/PageTransition';
-import { Users, ShoppingCart, DollarSign, BarChart2 } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, BarChart, Bar, Legend } from 'recharts';
-
-// Mock data for charts
-const salesData = [
-  { name: 'Jan', value: 4000 },
-  { name: 'Feb', value: 3000 },
-  { name: 'Mar', value: 5000 },
-  { name: 'Apr', value: 2780 },
-  { name: 'May', value: 1890 },
-  { name: 'Jun', value: 2390 },
-  { name: 'Jul', value: 3490 },
-  { name: 'Aug', value: 2000 },
-  { name: 'Sep', value: 2500 },
-  { name: 'Oct', value: 3300 },
-  { name: 'Nov', value: 4200 },
-  { name: 'Dec', value: 4800 },
-];
-
-const trafficData = [
-  { name: 'Mon', desktop: 4000, mobile: 2400, tablet: 1400 },
-  { name: 'Tue', desktop: 3000, mobile: 1398, tablet: 1600 },
-  { name: 'Wed', desktop: 2000, mobile: 4800, tablet: 2100 },
-  { name: 'Thu', desktop: 2780, mobile: 3908, tablet: 1700 },
-  { name: 'Fri', desktop: 1890, mobile: 4800, tablet: 1200 },
-  { name: 'Sat', desktop: 2390, mobile: 3800, tablet: 1800 },
-  { name: 'Sun', desktop: 3490, mobile: 4300, tablet: 2100 },
-];
+import DynamicSidebar from '../components/DynamicSidebar';
+import { LayoutDashboard, Users, Settings, Layers, BarChart4 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const { requireAuth } = useAuth();
@@ -42,9 +12,18 @@ const Dashboard: React.FC = () => {
     requireAuth();
   }, [requireAuth]);
 
+  // Define menu items
+  const menuItems = [
+    { id: 'dashboard', icon: LayoutDashboard, text: 'Dashboard', to: '/dashboard' },
+    { id: 'users', icon: Users, text: 'Users', to: '/users' },
+    { id: 'master', icon: Layers, text: 'Master', to: '/master' },
+    { id: 'reports', icon: BarChart4, text: 'Reports', to: '/reports' },
+    { id: 'settings', icon: Settings, text: 'Settings', to: '/settings' },
+  ];
+
   return (
     <div className="min-h-screen flex bg-background">
-      <Sidebar />
+      <DynamicSidebar menuItems={menuItems} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <DashboardHeader pageTitle="Dashboard" />
         <PageTransition>
